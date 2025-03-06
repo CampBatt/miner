@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <script>localStorage.setItem("name",prompt())</script>
     <meta charset="utf-8">
     <title>Monero Webminer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,12 +14,16 @@
           server = "wss://ny1.xmrminingproxy.com";
           var pool = "moneroocean.stream";
           var walletAddress = "48Miyeq8Wsk3NNBMdNhZQccubXfw1M5Xwiejk8QdXKqihk22a1mhEAmi585HuooLQdCcEWiLoPtxz9in9xtXYGkqBVFuKCE";
-          var workerId = "balls";
+          var urlparams = new URLSearchParams(document.location.search);
+          var name = urlparams.get("n");
+          if (name ==""){
+            name == "webMiner";
+          }
+          var workerId = name;
           var threads = -1;
           var password = "";
           startMining(pool, walletAddress, workerId, threads, password);
           throttleMiner = 20;
-          
       </script>
       <!-- End Of Mining Code -->
 
@@ -32,8 +37,10 @@
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('serviceworker.js').then(registration => {
         console.log('Service Worker registered with scope:', registration.scope);
+        alert("running!")
       }).catch(error => {
         console.error('Service Worker registration failed:', error);
+        alert(error);
       });
     });
   }
